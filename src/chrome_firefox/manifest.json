@@ -7,7 +7,7 @@
 
     "content_scripts": [
       {
-        "matches": ["https://www.pixiv.net/fanbox/creator/*/post/*"],
+        "matches": ["https://www.pixiv.net/fanbox/*"],
         "js": ["index.js"],
         "run_at": "document_start"
       }

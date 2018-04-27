@@ -22,14 +22,14 @@ const isTextArticle = (contentElement: Element) => {
     return !!contentElement.lastElementChild && contentElement.lastElementChild.nodeName === 'DIV'
 }
 
-document.addEventListener('DOMContentLoaded', async () => {
+const setup = async () => {
     const rootElement = document.querySelector('#root')
 
     const styleElement = document.createElement('style')
     styleElement.innerHTML = style
     document.head.appendChild(styleElement)
 
-    const initialize = (contentElement: Element) => {
+    const replace = (contentElement: Element) => {
         const postsUrl = /^\/fanbox\/creator\/\d+\/post/.exec(location.pathname)[0]
         contentElement.classList.add('fm-Content')
         contentElement.innerHTML = marked(contentElement.textContent, {
@@ -51,12 +51,21 @@ document.addEventListener('DOMContentLoaded', async () => {
         const contentElement = el.parentElement!.parentElement!.parentElement!.children[1].lastElementChild
 
         if (isTextArticle(contentElement)) {
-            initialize(contentElement.lastElementChild)
+            replace(contentElement.lastElementChild)
         } else {
-            initialize(contentElement)
+            replace(contentElement)
         }
 
         await new Promise(r => requestAnimationFrame(r))
     }
-})
+}
 
+let lastPath: string = ''
+setInterval(() => {
+    if (!/\/fanbox\/creator\/\d+\/post\/\d+/.test(location.pathname)) {
+        lastPath = ''
+    } else if (location.pathname !== lastPath) {
+        lastPath = location.pathname
+        setup()
+    }
+}, 100)
