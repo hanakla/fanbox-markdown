@@ -7,9 +7,5 @@
             "dom.iterable",
             "es2015"
         ]
-    },
-    "files": [
-        "./src/chrome/index.ts",
-        "./src/firefox/index.ts"
-    ]
+    }
 }

@@ -8,8 +8,8 @@
     "dev": "webpack --watch --mode development"
   },
   "dependencies": {
-    "lodash-es": "4.17.10",
-    "marked": "0.3.19"
+    "marked": "0.3.19",
+    "remark": "9.0.0"
   },
   "devDependencies": {
     "@types/lodash-es": "4.17.0",

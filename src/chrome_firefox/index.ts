@@ -1,11 +1,26 @@
 import * as marked from 'marked'
-import { debounce } from 'lodash-es'
 
 const style = `
-.fm-Content li + .fm-Content li {
-    margin-top: 1px;
+.fm-Content {
+    white-space: normal;
+}
+
+.fm-Content p {
+    margin: 24px 0;
+}
+
+.fm-Content h2 {
+    margin: 24px 0 16px;
+}
+
+.fm-Content li + li {
+    margin-top: 8px;
 }
 `
+
+const isTextArticle = (contentElement: Element) => {
+    return !!contentElement.lastElementChild
+}
 
 document.addEventListener('DOMContentLoaded', async () => {
     const rootElement = document.querySelector('#root')
@@ -14,13 +29,16 @@ document.addEventListener('DOMContentLoaded', async () => {
     styleElement.innerHTML = style
     document.head.appendChild(styleElement)
 
-    const initialize = debounce((contentElement: Element) => {
-        const postsUrl = /^\/fanbox\/creator\/\d+\/post/.exec(location.pathname)[0]
-        contentElement.innerHTML = marked(contentElement.textContent)
-        contentElement.classList.add('fm-Content')
+    const initialize = (contentElement: Element) => {
+        console.log('initialize')
 
-        console.log(marked(contentElement.textContent))
-    }, 1000)
+        const postsUrl = /^\/fanbox\/creator\/\d+\/post/.exec(location.pathname)[0]
+        contentElement.classList.add('fm-Content')
+        contentElement.innerHTML = marked(contentElement.textContent, {
+            gfm: true,
+            breaks: true,
+        })
+    }
 
 
     let el: Element  = null
@@ -29,14 +47,19 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
         if (!el) {
-            await new Promise(r => setTimeout(r, 0))
+            await new Promise(r => requestAnimationFrame(r))
             continue
         }
 
-        const contentElement = el.parentElement!.parentElement!.parentElement!.children[1].lastChild as Element
-        contentElement && initialize(contentElement)
+        const contentElement = el.parentElement!.parentElement!.parentElement!.children[1].lastElementChild
 
-        await new Promise(r => setTimeout(r, 0))
+        if (isTextArticle(contentElement)) {
+            initialize(contentElement.lastElementChild)
+        } else {
+            initialize(contentElement)
+        }
+
+        await new Promise(r => requestAnimationFrame(r))
     }
 })
 
