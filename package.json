@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "webpack --watch --mode development",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production && zip -r ./dist/fanbox-markdown.zip ./dist/chrome_firefox/*"
   },
   "dependencies": {
     "marked": "0.3.19",
