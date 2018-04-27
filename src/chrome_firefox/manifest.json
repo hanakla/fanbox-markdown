@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "fanbox-markdown",
-    "version": "1.0.0",
+    "version": "1.0.1",
 
     "description": "Enable to markdown in pixivFANBOX",
 
