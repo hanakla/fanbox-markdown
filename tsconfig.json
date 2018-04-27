@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "target": "es2015",
+        "module": "es2015",
+        "lib": [
+            "dom",
+            "dom.iterable",
+            "es2015"
+        ]
+    },
+    "files": [
+        "./src/chrome/index.ts",
+        "./src/firefox/index.ts"
+    ]
+}

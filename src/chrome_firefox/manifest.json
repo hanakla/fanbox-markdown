@@ -1,0 +1,15 @@
+{
+    "manifest_version": 2,
+    "name": "fanbox-markdown",
+    "version": "1.0",
+
+    "description": "Enable to markdown in pixivFANBOX",
+
+    "content_scripts": [
+      {
+        "matches": ["https://www.pixiv.net/fanbox/creator/*/post/*"],
+        "js": ["index.js"],
+        "run_at": "document_start"
+      }
+    ]
+  }

@@ -1,0 +1,25 @@
+{
+  "name": "fanbox-markdown",
+  "version": "1.0.0",
+  "description": "Markdown extension for pixivFANBOX",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "webpack --watch --mode development"
+  },
+  "dependencies": {
+    "lodash-es": "4.17.10",
+    "marked": "0.3.19"
+  },
+  "devDependencies": {
+    "@types/lodash-es": "4.17.0",
+    "@types/marked": "0.3.0",
+    "@types/webpack": "4.1.4",
+    "copy-webpack-plugin": "4.5.1",
+    "ts-loader": "4.2.0",
+    "ts-node": "6.0.1",
+    "typescript": "2.8.3",
+    "webpack": "4.6.0",
+    "webpack-cli": "2.0.15"
+  }
+}
