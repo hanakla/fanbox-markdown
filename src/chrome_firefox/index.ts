@@ -19,7 +19,7 @@ const style = `
 `
 
 const isTextArticle = (contentElement: Element) => {
-    return !!contentElement.lastElementChild
+    return !!contentElement.lastElementChild && contentElement.lastElementChild.nodeName === 'DIV'
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -30,8 +30,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.head.appendChild(styleElement)
 
     const initialize = (contentElement: Element) => {
-        console.log('initialize')
-
         const postsUrl = /^\/fanbox\/creator\/\d+\/post/.exec(location.pathname)[0]
         contentElement.classList.add('fm-Content')
         contentElement.innerHTML = marked(contentElement.textContent, {
@@ -44,7 +42,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     let el: Element  = null
     while (el == null) {
         el = [...document.querySelectorAll('button')].find(el => el.textContent === 'いいね')
-
 
         if (!el) {
             await new Promise(r => requestAnimationFrame(r))
